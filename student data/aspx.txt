@@ -1,0 +1,43 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication2.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        function studentdata() {
+            var inputVal = document.getElementById("txtInput").value;
+            if (inputVal == "") return;
+            $.ajax({
+                url: 'WebForm1.aspx/student',
+                type: 'post',
+                data: JSON.stringify({ "inputValue": inputVal }),
+                contentType: 'application/json',
+                async: false,
+                success: function (data) {
+                    if (data.d) {
+                        alert("Number is EVEN");
+                    }
+                    else {
+                        alert("Number is ODD");
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+   <form runat="server" id="myForm">
+        <asp:Label ID="Label1" runat="server" Text="Select the student"></asp:Label>  
+    <asp:DropDownList runat="server" ID="Drop" ></asp:DropDownList>
+    </form>
+ 
+       <%-- <br />  
+        <asp:Button runat="server" ID="Button1" OnClientClick="javascript: return student();"  Text="Click" OnClick ="btnSubmit_Click1"/> --%>
+    
+
+</body>
+</html>
